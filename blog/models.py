@@ -5,6 +5,11 @@ class User(models.Model):
     name = models.CharField(max_length=32)
     mail = models.EmailField()
 
+    def __repr__(self):
+        return "{}: {}".format(self.pk, self.name)
+
+    __str__ = __repr__
+
 #記事モデル
 class Post(models.Model):
     STATUS_DRAFT = "draft"
@@ -21,3 +26,8 @@ class Post(models.Model):
     #Postを書いた人の情報として、Userを参照する
     #Djangoの場合related_nameを付けるだけで逆参照も行える
     author = models.ForeignKey(User, related_name='Posts', on_delete=models.CASCADE)
+
+    def __repr__(self):
+        return "{}: {}".format(self.pk, self.title)
+
+    __str__ = __repr__
